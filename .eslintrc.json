@@ -1,0 +1,107 @@
+{
+    "root": true,
+    "ignorePatterns": [
+        "**/*"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "tsconfig.base.json",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@nrwl/nx",
+        "@typescript-eslint/eslint-plugin",
+        "unused-imports"
+    ],
+    "extends": [
+        "plugin:import/recommended",
+        "airbnb-typescript/base",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
+    ],
+    "overrides": [
+        {
+            "files": [
+                "*.ts",
+                "*.tsx",
+                "*.js",
+                "*.jsx"
+            ],
+            "rules": {
+                "@nrwl/nx/enforce-module-boundaries": [
+                    "off",
+                    {
+                        "enforceBuildableLibDependency": true,
+                        "allow": [],
+                        "depConstraints": [
+                            {
+                                "sourceTag": "*",
+                                "onlyDependOnLibsWithTags": [
+                                    "*"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "@typescript-eslint/interface-name-prefix": "off",
+                "@typescript-eslint/explicit-function-return-type": "warn",
+                "@typescript-eslint/explicit-module-boundary-types": "warn",
+                "@typescript-eslint/no-explicit-any": "warn",
+                "no-unused-vars": "error",
+                "unused-imports/no-unused-imports": "error",
+                "unused-imports/no-unused-vars": [
+                    "warn",
+                    {
+                        "vars": "all",
+                        "varsIgnorePattern": "^_",
+                        "args": "after-used",
+                        "argsIgnorePattern": "^_"
+                    }
+                ],
+                "@typescript-eslint/naming-convention": "off"
+            }
+        },
+        {
+            "files": [
+                "*.ts",
+                "*.tsx"
+            ],
+            "excludedFiles": [
+                "*.spec.ts",
+                "*.mock.ts"
+            ],
+            "extends": [
+                "plugin:@nrwl/nx/typescript"
+            ],
+            "rules": {
+                "max-lines": [
+                    "error",
+                    {
+                        "max": 500,
+                        "skipBlankLines": true,
+                        "skipComments": true
+                    }
+                ],
+                "max-lines-per-function": [
+                    "error",
+                    {
+                        "max": 150,
+                        "skipBlankLines": true,
+                        "skipComments": true
+                    }
+                ]
+            }
+        },
+        {
+            "files": [
+                "*.js",
+                "*.jsx"
+            ],
+            "extends": [
+                "plugin:@nrwl/nx/javascript"
+            ],
+            "rules": {}
+        }
+    ]
+}

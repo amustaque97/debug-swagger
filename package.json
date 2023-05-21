@@ -1,0 +1,27 @@
+{
+  "name": "debug-swagger",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "pnpm exec nx serve",
+    "build": "pnpm exec nx build --generatePackageJson",
+    "test": "pnpm exec nx test --code-coverage=true --coverageReporters=cobertura,text,text-summary --reporters=default,jest-junit",
+    "lint": "pnpm exec nx lint --fix",
+    "start:all": "pnpm exec nx run-many --target=serve --all=true --parallel=3",
+    "build:all": "pnpm exec nx run-many --target=build --all=true --parallel=3 --generatePackageJson ",
+    "test:all": "pnpm exec nx run-many --target=test --all=true --parallel=3 --code-coverage=true --coverageReporters=text,text-summary,cobertura --reporters=default,jest-junit",
+    "lint:all": "pnpm exec nx run-many --target=lint --all=true --fix --parallel=3",
+    "build:affected": "pnpm exec nx affected --uncommitted --target=build --parallel=3 --generatePackageJson",
+    "test:affected": "pnpm exec nx affected --uncommitted --target=text --parallel=3 --code-coverage=true --coverageReporters=text,text-summary,cobertura --reporters=default,jest-junit",
+    "lint:affected": "pnpm exec nx affected --uncommitted --target=lint --parallel=3 --fix ",
+    "graph": "pnpm exec nx graph"
+  },
+  "private": true,
+  "devDependencies": {},
+  "dependencies": {},
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

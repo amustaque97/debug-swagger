@@ -1,0 +1,70 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/debug-swagger/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/debug-swagger",
+        "main": "apps/debug-swagger/src/main.ts",
+        "tsConfig": "apps/debug-swagger/tsconfig.app.json",
+        "tsPlugin": [
+          {
+            "name": "@nestjs/swagger/plugin",
+            "options": {
+              "classValidatorShim": true,
+              "introspectComments": true,
+              "dtoFileNameSuffix": [
+                ".dto.ts",
+                ".entity.ts",
+                ".schema.ts",
+                ".interface.ts"
+              ]
+            }
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/debug-swagger/src/environments/environment.ts",
+              "with": "apps/debug-swagger/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "debug-swagger:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "debug-swagger:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/debug-swagger/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "echo TODO: SKIPPING TEST",
+        "cwd": "apps/debug-swagger"
+      }
+    }
+  },
+  "tags": []
+}
